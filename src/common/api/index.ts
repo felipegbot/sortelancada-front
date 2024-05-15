@@ -8,7 +8,7 @@ const headers = {
 };
 
 const Api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL ?? "http://localhost:1337",
+  baseURL: "http://192.168.12.13:1337",
   headers,
 });
 

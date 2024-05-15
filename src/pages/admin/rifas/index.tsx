@@ -1,4 +1,4 @@
-import { generateRaffleDataTableColumn } from "@/components/raffle-column";
+import { generateRaffleDataTableColumn } from "@/components/admin/raffle-column";
 import { DataTable } from "@/components/ui/data-table";
 import { Separator } from "@/components/ui/separator";
 import { useGetRafflesHook } from "@/hooks/get-raffles.hook";

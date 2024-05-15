@@ -1,5 +1,13 @@
-import { ReactElement, useState } from "react";
-import { ChevronLeft, Database, LineChart, LogOut, Table2 } from "lucide-react";
+import { ReactElement, useEffect, useState } from "react";
+import {
+  ChevronLeft,
+  CircleDollarSign,
+  HelpCircle,
+  HomeIcon,
+  LogOut,
+  Star,
+  Ticket,
+} from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useWindowSize } from "@/common/hooks/use-window-size.hook";
@@ -24,89 +32,93 @@ const SidebarItem: React.FC<{
     </Link>
   );
 };
-export const CommonSidebarComponent = () => {
-  const { width } = useWindowSize();
-  const [open, setOpen] = useState(width < 768);
+export const CommonSidebarComponent = ({
+  isOpen,
+  toggleIsOpen,
+}: {
+  isOpen: boolean;
+  toggleIsOpen: () => void;
+}) => {
+  // const { width } = useWindowSize();
   const location = usePathname();
 
-  const toggleOpen = () => {
-    if (width > 768) return;
-    setOpen(!open);
-  };
   if (["/login", "/create-account", "/logout"].includes(location)) return null;
   return (
     <>
       <div
-        className={`absolute w-screen z-20 flex flex-row justify-between items-center px-2 md:px-5`}
-      >
-        {width < 768 && (
-          <button
-            className={`rounded-full p-3 pl-10 transition-all ease-in-out duration-200 ${
-              open ? "translate-x-44" : "-translate-x-10"
-            } bg-black border-2 border-accent text-white flex flex-row items-center`}
-            onClick={toggleOpen}
-          >
-            <ChevronLeft
-              size={20}
-              className={`transition-all ${open ? "rotate-0" : "rotate-180"}`}
-            />
-          </button>
-        )}
-      </div>
-      <div
         className={`${
-          open ? "absolute md:relative left-0" : "absolute -left-52"
+          isOpen ? "absolute left-0" : "absolute -left-52"
         } transition-all`}
       >
         <div
           className={`relative z-30 flex flex-col h-screen justify-between bg-secondary shadow-lg md:w-[68px]`}
           style={{
-            transition: "width 0.2s ease-in-out",
-            width: open ? 224 : 0,
+            transition: `width ease-in-out 0.2s`,
+            width: isOpen ? 224 : 0,
           }}
         >
           <div className={`flex flex-col h-full justify-between`}>
             <div className="space-y-4">
-              <div className="flex items-center justify-center my-3 p-0 shadow pb-[11px]">
-                <img src="/sortelancada-transformed.webp" />
+              <div className="flex items-center flex-row align-center justify-evenly my-3 p-0 shadow pb-[11px]">
+                <img
+                  src="/sortelancada-transformed.webp"
+                  style={{ height: 100, width: 150 }}
+                />
+                <div className="cursor-pointer" onClick={toggleIsOpen}>
+                  <ChevronLeft color="white" />
+                </div>
               </div>
 
               <SidebarItem
                 location={location}
-                label="Gráficos"
-                icon={<LineChart />}
+                label="Início"
+                icon={<HomeIcon />}
                 url="/"
               />
               <SidebarItem
                 location={location}
-                label="Tabelas"
-                icon={<Table2 />}
-                url="/tables"
+                label="Rifas"
+                icon={<CircleDollarSign />}
+                url="/rifas"
               />
               <SidebarItem
                 location={location}
-                label="Dados"
-                icon={<Database />}
-                url="/data"
+                label="Ganhadores"
+                icon={<Star />}
+                url="/ganhadores"
+              />
+              <SidebarItem
+                location={location}
+                label="Minhas Cotas"
+                icon={<Ticket />}
+                url="/tickets"
               />
             </div>
-            <SidebarItem
-              location={location}
-              label="Sair"
-              icon={<LogOut color="gray" />}
-              url="/logout"
-            />
+            <div className="">
+              <SidebarItem
+                location={location}
+                label="Suporte"
+                icon={<HelpCircle />}
+                url="/logout"
+              />
+              <SidebarItem
+                location={location}
+                label="Sair"
+                icon={<LogOut color="gray" />}
+                url="/logout"
+              />
+            </div>
           </div>
         </div>
       </div>
-      {width < 768 && (
-        <div
-          onClick={toggleOpen}
-          className={`absolute top-0 left-0 z-10 ${
-            open ? "w-screen opacity-80" : "w-screen opacity-0 invisible"
-          } h-screen bg-secondary transition-opacity`}
-        />
-      )}
+
+      <div
+        onClick={toggleIsOpen}
+        className={`absolute top-0 left-0 z-10 ${
+          // i dont know why, but 98.7vh its the max
+          isOpen ? "w-[98.7vw] opacity-80" : "w-0 opacity-0 invisible"
+        } h-screen bg-secondary transition-opacity`}
+      />
     </>
   );
 };
