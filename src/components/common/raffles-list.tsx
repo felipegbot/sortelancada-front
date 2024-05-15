@@ -11,7 +11,7 @@ export default function RafflesList({ raffles }: { raffles: Raffle[] }) {
   );
 
   return (
-    <div>
+    <div className="space-y-4 w-full md:max-w-[50%] flex flex-col justify-center">
       {openRaffles?.map((raffle) => (
         <OpenRaffleCard key={raffle.id} raffle={raffle} />
       ))}

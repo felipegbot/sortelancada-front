@@ -10,7 +10,11 @@ export default function App({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <div className="flex flex-col">
         <LayoutHeader />
-        <Component {...pageProps} />
+        <div className="w-full flex justify-center">
+          <div className="flex justify-center w-full max-w-[70%] ">
+            <Component {...pageProps} />
+          </div>
+        </div>
       </div>
     </QueryClientProvider>
   );
