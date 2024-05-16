@@ -8,12 +8,10 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="flex flex-col">
-        <LayoutHeader />
-        <div className="w-full flex justify-center">
-          <div className="flex justify-center w-full max-w-[70%] ">
-            <Component {...pageProps} />
-          </div>
+      <LayoutHeader />
+      <div className="w-full flex justify-center overflow-y-auto">
+        <div className="flex justify-center w-full max-w-[70%] ">
+          <Component {...pageProps} />
         </div>
       </div>
     </QueryClientProvider>

@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { CommonSidebarComponent } from "./common-sidebar";
 import { useState } from "react";
-import { CircleUser, FileStack, Menu } from "lucide-react";
+import { CircleUser, Menu } from "lucide-react";
 
 export default function LayoutHeader() {
   const router = useRouter();

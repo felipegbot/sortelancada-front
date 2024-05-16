@@ -10,7 +10,6 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useWindowSize } from "@/common/hooks/use-window-size.hook";
 
 const SidebarItem: React.FC<{
   label: string;

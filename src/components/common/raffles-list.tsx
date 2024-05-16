@@ -1,6 +1,7 @@
 import { RaffleStatus } from "@/common/enum/raffle-status.enum";
 import { Raffle } from "@/common/interfaces/raffles.interface";
 import OpenRaffleCard from "./open-raffle-card";
+import FinishedRaffleCard from "./finished-raffles-card";
 
 export default function RafflesList({ raffles }: { raffles: Raffle[] }) {
   const openRaffles = raffles.filter(
@@ -21,10 +22,9 @@ export default function RafflesList({ raffles }: { raffles: Raffle[] }) {
       {openRaffles?.map((raffle) => (
         <OpenRaffleCard key={raffle.id} raffle={raffle} />
       ))}
-      {finishedRaffles.length > 0 &&
-        finishedRaffles.map((raffle) => (
-          <div>FINISHED RAFFLE CARD HERE {raffle.id}</div>
-        ))}
+      {finishedRaffles?.map((raffle) => (
+        <FinishedRaffleCard key={raffle.id} raffle={raffle} />
+      ))}
     </div>
   );
 }
