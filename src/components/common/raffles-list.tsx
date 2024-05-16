@@ -12,13 +12,7 @@ export default function RafflesList({ raffles }: { raffles: Raffle[] }) {
   );
 
   return (
-    <div className="space-y-4 w-full md:max-w-[70%] lg:max-w-[40%] flex flex-col justify-center items-center">
-      <div className="flex flex-row items-center w-full justify-between">
-        <span className="text-[25px] md:text-[45px] scale-x-[-1]">🍀</span>
-        <span className="font-bold text-xl md:text-4xl">Sua sorte chegou!</span>
-        <span className="text-[25px] md:text-[45px]">🍀</span>
-      </div>
-      <span>Cotas em andamento e finalizadas</span>
+    <div className="space-y-4 h-full w-full ">
       {openRaffles?.map((raffle) => (
         <OpenRaffleCard key={raffle.id} raffle={raffle} />
       ))}

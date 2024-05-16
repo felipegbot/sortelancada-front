@@ -9,8 +9,8 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <LayoutHeader />
-      <div className="w-full flex justify-center overflow-y-auto">
-        <div className="flex justify-center w-full max-w-[70%] ">
+      <div className="w-full h-full flex justify-center overflow-y-auto">
+        <div className="flex min-h-[94.1vh] justify-center w-full max-w-[70%] overflow-y-hidden">
           <Component {...pageProps} />
         </div>
       </div>

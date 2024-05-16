@@ -1,4 +1,5 @@
 import { RaffleStatus } from "../enum/raffle-status.enum";
+import { CommonUser } from "./common-users.interface";
 
 export interface Raffle {
   id: string;
@@ -18,4 +19,5 @@ export interface Raffle {
   price_number: number;
   created_at: Date;
   updated_at: Date;
+  winner_common_user?: CommonUser;
 }

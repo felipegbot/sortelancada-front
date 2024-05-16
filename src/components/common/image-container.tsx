@@ -1,5 +1,15 @@
-export const ImageContainer = ({ src }: { src?: string }) => {
+export const ImageContainer = ({
+  src,
+  objectFit,
+}: {
+  src?: string;
+  objectFit?: string;
+}) => {
+  if (!src) return null;
   return (
-    <img className="object-scale-down h-auto sm:h-full rounded-xl" src={src} />
+    <img
+      className={`${objectFit ? `${objectFit}` : "object-cover"}h-auto sm:h-full rounded-xl`}
+      src={src}
+    />
   );
 };

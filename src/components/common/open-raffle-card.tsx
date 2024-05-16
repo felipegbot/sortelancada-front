@@ -1,4 +1,3 @@
-import translateRaffleStatus from "@/common/helpers/translate-raffle-status";
 import { Raffle } from "@/common/interfaces/raffles.interface";
 import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
 import currencyFormatter from "@/lib/currency-formatter";
@@ -9,10 +8,11 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import { ImageContainer } from "./image-container";
+import RaffleStatusBadge from "./raffle-status-badge";
 
 export default function OpenRaffleCard({ raffle }: { raffle: Raffle }) {
   return (
-    <Card className="p-4 bg-gray-700 rounded-xl w-full shadow-2xl">
+    <Card className="p-4 bg-gray-700 rounded-xl w-full">
       <CardBody className="overflow-visible py-2">
         <div
           className="flex items-center justify-center rounded-xl"
@@ -52,9 +52,7 @@ export default function OpenRaffleCard({ raffle }: { raffle: Raffle }) {
           <span className="text-tiny font-bold">
             {currencyFormatter.format(raffle.price_number)}/cota
           </span>
-          <span className="bg-green-800 text-tiny text-white px-2 py-1 uppercase rounded-full">
-            {translateRaffleStatus(raffle.status)}
-          </span>
+          <RaffleStatusBadge status={raffle.status} />
         </div>
       </CardHeader>
       <CardFooter className="flex text-center justify-center bg-green-500 text-white px-2 py-1 rounded-full mt-4 cursor-pointer animate-pulse">
