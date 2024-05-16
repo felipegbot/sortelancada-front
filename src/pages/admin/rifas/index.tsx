@@ -1,7 +1,6 @@
 import { generateRaffleDataTableColumn } from "@/components/admin/raffle-column";
 import { DataTable } from "@/components/ui/data-table";
-import { Separator } from "@/components/ui/separator";
-import { useGetRafflesHook } from "@/hooks/get-raffles.hook";
+import { useGetRafflesHook } from "@/hooks/admin/get-raffles.hook";
 
 export default function Home() {
   const { raffles, total, page, perPage } = useGetRafflesHook();

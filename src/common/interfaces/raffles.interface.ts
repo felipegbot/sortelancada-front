@@ -7,6 +7,8 @@ export interface Raffle {
   medias_url: string[];
   prize_name: string;
   status: RaffleStatus;
+  min_quantity: number;
+  cover_url?: string;
   prize_number: number;
   gift_numbers: number[];
   gift_numbers_winners: string;

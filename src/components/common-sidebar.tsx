@@ -115,8 +115,8 @@ export const CommonSidebarComponent = ({
       <div
         onClick={toggleIsOpen}
         className={`absolute top-0 left-0 z-10 ${
-          // i dont know why, but 98.7vh its the max
-          isOpen ? "w-[98.7vw] opacity-80" : "w-0 opacity-0 invisible"
+          // i dont know why, but 97.6vh its the max
+          isOpen ? "w-screen opacity-80" : "w-0 opacity-0 invisible"
         } h-screen bg-secondary transition-opacity`}
       />
     </>
