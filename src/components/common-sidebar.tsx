@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement } from "react";
 import {
   ChevronLeft,
   CircleDollarSign,
@@ -60,8 +60,8 @@ export const CommonSidebarComponent = ({
             <div className="space-y-4">
               <div className="flex items-center flex-row align-center justify-evenly my-3 p-0 shadow pb-[11px]">
                 <img
-                  src="/sortelancada-transformed.webp"
-                  style={{ height: 100, width: 150 }}
+                  src="/moneyedolar.gif"
+                  style={{ height: 100, width: 100 }}
                 />
                 <div className="cursor-pointer" onClick={toggleIsOpen}>
                   <ChevronLeft color="white" />
@@ -114,7 +114,6 @@ export const CommonSidebarComponent = ({
       <div
         onClick={toggleIsOpen}
         className={`absolute top-0 left-0 z-10 ${
-          // i dont know why, but 97.6vh its the max
           isOpen ? "w-screen opacity-80" : "w-0 opacity-0 invisible"
         } h-screen bg-secondary transition-opacity`}
       />

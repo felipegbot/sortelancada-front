@@ -20,7 +20,7 @@ export default function RaffleStatusBadge({
   }
   return (
     <span
-      className={`${color} w-min text-tiny text-white px-2 py-1 uppercase rounded-full`}
+      className={`${color} w-min text-nowrap text-tiny text-white px-2 py-1 uppercase rounded-full`}
     >
       {translateRaffleStatus(status)}
     </span>

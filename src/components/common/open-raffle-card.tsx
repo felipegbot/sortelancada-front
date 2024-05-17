@@ -58,8 +58,8 @@ export default function OpenRaffleCard({ raffle }: { raffle: Raffle }) {
             <RaffleStatusBadge status={raffle.status} />
           </div>
         </CardHeader>
-        <CardFooter className="flex text-center justify-center bg-green-500 text-white px-2 py-1 rounded-full mt-4 cursor-pointer animate-pulse">
-          CLIQUE AQUI PARA COMPRAR SUA COTA
+        <CardFooter className="flex text-center  justify-center bg-green-500 text-white px-2 py-1 rounded-full mt-4 cursor-pointer animate-pulse">
+          COMPRAR COTA
         </CardFooter>
       </Card>
     </div>

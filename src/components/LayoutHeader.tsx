@@ -12,7 +12,7 @@ export default function LayoutHeader() {
     setIsOpen(!isOpen);
   };
   return (
-    <div className="w-full bg-black sticky top-0 flex flex-row  justify-between z-50">
+    <div className="w-full h-[72px] bg-black sticky top-0 flex flex-row justify-between z-50">
       <div className="absolute">
         {isAdmin ? (
           <AdminSidebarComponent />
@@ -20,10 +20,18 @@ export default function LayoutHeader() {
           <CommonSidebarComponent isOpen={isOpen} toggleIsOpen={toggleIsOpen} />
         )}
       </div>
-      <div className="p-4" onClick={() => setIsOpen(!isOpen)}>
+      <div
+        className="h-full flex items-center px-6"
+        onClick={() => setIsOpen(!isOpen)}
+      >
         <Menu />
       </div>
-      <span className="p-4">LOGO</span>
+      <span className="max-md:text-tiny h-full flex items-center">
+        AS MELHORES AÇÕES E PRÊMIOS 🍀
+      </span>
+      <div className="p-2 w-[70px] h-[70px]">
+        <img src="/logo.svg" />
+      </div>
       {isAdmin && (
         <div className="p-4">
           <CircleUser />

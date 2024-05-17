@@ -12,12 +12,11 @@ export default function Home() {
           className="p-4 flex flex-col w-full justify-center items-center space-y-2"
         >
           <img src="/sortelancada-idea.svg" alt="sorte" />
-          <span className="uppercase text-tiny">
-            -Cotas em andamento e finalizadas-
-          </span>
         </Card>
       </div>
-      {raffles && <RafflesList raffles={raffles} />}
+      {raffles && <RafflesList raffles={new Array(3).fill(raffles[0])} />}
+
+      {raffles && <RafflesList raffles={new Array(3).fill(raffles[1])} />}
     </div>
   );
 }
