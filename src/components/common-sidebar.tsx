@@ -1,27 +1,48 @@
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 import {
   ChevronLeft,
   CircleDollarSign,
+  Handshake,
   HelpCircle,
   HomeIcon,
   LogOut,
+  ScrollText,
   Star,
   Ticket,
+  UserPlus,
+  Zap,
 } from "lucide-react";
+import CreateCommonUserModal from "@/components/common/create-common-user-modal";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+
+const SidebarFunctionItem: React.FC<{
+  label: string;
+  icon: ReactElement;
+  onClick: () => void;
+}> = ({ icon, label, onClick }) => {
+  return (
+    <div
+      onClick={onClick}
+      className={`cursor-pointer flex flex-row items-center transition-colors duration-300 mx-3 my-1 rounded-lg justify-start p-2  pl-3 text-white hover:bg-black hover:bg-opacity-20`}
+    >
+      {icon}
+      <span className={`ml-2 transition-all`}>{label}</span>
+    </div>
+  );
+};
 
 const SidebarItem: React.FC<{
   label: string;
   icon: ReactElement;
   url: string;
-  location: string;
-}> = ({ icon, label, url, location }) => {
+  isSelected?: boolean;
+}> = ({ icon, label, url, isSelected }) => {
   return (
     <Link
       href={url}
       className={`flex flex-row items-center transition-colors duration-300 mx-3 my-1 rounded-lg justify-start p-2  pl-3 ${
-        location === url
+        isSelected
           ? "bg-white text-black"
           : "text-white hover:bg-black hover:bg-opacity-20"
       }`}
@@ -31,6 +52,7 @@ const SidebarItem: React.FC<{
     </Link>
   );
 };
+
 export const CommonSidebarComponent = ({
   isOpen,
   toggleIsOpen,
@@ -38,10 +60,10 @@ export const CommonSidebarComponent = ({
   isOpen: boolean;
   toggleIsOpen: () => void;
 }) => {
-  // const { width } = useWindowSize();
   const location = usePathname();
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
   if (["/login", "/create-account", "/logout"].includes(location)) return null;
+
   return (
     <>
       <div
@@ -68,40 +90,72 @@ export const CommonSidebarComponent = ({
                 </div>
               </div>
 
+              <CreateCommonUserModal
+                isOpen={isModalOpen}
+                closeModal={() => setIsModalOpen(false)}
+              />
+
               <SidebarItem
-                location={location}
+                isSelected={location === "/"}
                 label="Início"
                 icon={<HomeIcon />}
                 url="/"
               />
+              <SidebarFunctionItem
+                label="Cadastro/Login"
+                icon={<UserPlus />}
+                onClick={() => {
+                  console.log("Create common user");
+                  setIsModalOpen(true);
+                }}
+              />
               <SidebarItem
-                location={location}
+                // TODO: implementar a logica para redirecionar à rifa ativa
+                isSelected={location === "/rifas"}
+                label="Compra Rápida"
+                icon={<Zap />}
+                url="/rifas"
+              />
+              <SidebarItem
+                isSelected={location === "/rifas"}
                 label="Rifas"
                 icon={<CircleDollarSign />}
                 url="/rifas"
               />
               <SidebarItem
-                location={location}
-                label="Ganhadores"
-                icon={<Star />}
-                url="/ganhadores"
-              />
-              <SidebarItem
-                location={location}
+                isSelected={location === "/tickets"}
                 label="Minhas Cotas"
                 icon={<Ticket />}
                 url="/tickets"
               />
+              <SidebarItem
+                isSelected={location === "/ganhadores"}
+                label="Ganhadores"
+                icon={<Star />}
+                url="/ganhadores"
+              />
             </div>
             <div className="">
               <SidebarItem
-                location={location}
-                label="Suporte"
-                icon={<HelpCircle />}
-                url="/logout"
+                isSelected={location === "/politicas"}
+                label="Políticas"
+                icon={<Handshake />}
+                url="/politicas"
               />
               <SidebarItem
-                location={location}
+                isSelected={location === "/termos-de-uso"}
+                label="Termos de uso"
+                icon={<ScrollText />}
+                url="/termos-de-uso"
+              />
+              <SidebarItem
+                isSelected={location === "/suporte"}
+                label="Dúvidas e Suporte"
+                icon={<HelpCircle />}
+                url="/suporte"
+              />
+              <SidebarItem
+                isSelected={location === "/logout"}
                 label="Sair"
                 icon={<LogOut color="gray" />}
                 url="/logout"
