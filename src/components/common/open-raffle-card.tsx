@@ -10,9 +10,15 @@ import {
 import { ImageContainer } from "./image-container";
 import RaffleStatusBadge from "./raffle-status-badge";
 
-export default function OpenRaffleCard({ raffle }: { raffle: Raffle }) {
+export default function OpenRaffleCard({
+  raffle,
+  onClick,
+}: {
+  raffle: Raffle;
+  onClick?: () => void;
+}) {
   return (
-    <div className="bg-black/65 rounded-xl">
+    <div className="bg-black/65 rounded-xl cursor-pointer" onClick={onClick}>
       <Card className="p-4 rounded-xl bg-background w-full" isBlurred>
         <CardBody className="overflow-visible py-2">
           <div
