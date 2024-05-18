@@ -15,6 +15,8 @@ import {
 import CreateCommonUserModal from "@/components/common/create-common-user-modal";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useAppDispatch, useAppSelector } from "@/lib/redux/store";
+import { clearCommonUserData } from "@/lib/redux/reducers/common-user.reducer";
 
 const SidebarFunctionItem: React.FC<{
   label: string;
@@ -63,6 +65,8 @@ export const CommonSidebarComponent = ({
   const location = usePathname();
   const [isModalOpen, setIsModalOpen] = useState(false);
   if (["/login", "/create-account", "/logout"].includes(location)) return null;
+  const { name, phone } = useAppSelector((state) => state.commonUserReducer);
+  const dispatch = useAppDispatch();
 
   return (
     <>
@@ -101,14 +105,16 @@ export const CommonSidebarComponent = ({
                 icon={<HomeIcon />}
                 url="/"
               />
-              <SidebarFunctionItem
-                label="Cadastro/Login"
-                icon={<UserPlus />}
-                onClick={() => {
-                  console.log("Create common user");
-                  setIsModalOpen(true);
-                }}
-              />
+              {!name || !phone ? (
+                <SidebarFunctionItem
+                  label="Cadastro/Login"
+                  icon={<UserPlus />}
+                  onClick={() => {
+                    console.log("Create common user");
+                    setIsModalOpen(true);
+                  }}
+                />
+              ) : null}
               <SidebarItem
                 // TODO: implementar a logica para redirecionar à rifa ativa
                 isSelected={location === "/rifas"}
@@ -154,12 +160,13 @@ export const CommonSidebarComponent = ({
                 icon={<HelpCircle />}
                 url="/suporte"
               />
-              <SidebarItem
-                isSelected={location === "/logout"}
-                label="Sair"
-                icon={<LogOut color="gray" />}
-                url="/logout"
-              />
+              {name && phone ? (
+                <SidebarFunctionItem
+                  label="Sair"
+                  icon={<LogOut color="gray" />}
+                  onClick={() => dispatch(clearCommonUserData())}
+                />
+              ) : null}
             </div>
           </div>
         </div>
