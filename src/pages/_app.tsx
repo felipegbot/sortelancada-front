@@ -16,8 +16,8 @@ export default function App({ Component, pageProps }: AppProps) {
       <Provider store={store}>
         <ToastContainer theme="dark" />
         <LayoutHeader />
-        <div className="text-black bg-contain bg-repeat-space bg-[url('/background-img-nobg.png')] w-full h-full flex justify-center overflow-y-auto">
-          <div className="space-y-4  my-8 h-full w-full px-8 md:max-w-[50%] lg:max-w-[30%] overflow-y-hidden flex flex-col justify-center items-center">
+        <div className="text-black bg-fixed bg-cover bg-repeat-y bg-[url('/background-img-nobg.png')] w-full h-full flex justify-center overflow-y-auto">
+          <div className="space-y-4 my-8 h-full w-full px-8 md:max-w-3xl overflow-y-hidden flex flex-col justify-center items-center">
             <TitleWithLogo />
             <Component {...pageProps} />
           </div>

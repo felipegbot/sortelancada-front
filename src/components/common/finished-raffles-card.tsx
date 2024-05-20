@@ -4,7 +4,13 @@ import currencyFormatter from "@/lib/currency-formatter";
 import RaffleStatusBadge from "./raffle-status-badge";
 import { censorUsername } from "@/common/helpers/censor-username";
 
-export default function FinishedRaffleCard({ raffle }: { raffle: Raffle }) {
+export default function FinishedRaffleCard({
+  raffle,
+  onClick,
+}: {
+  raffle: Raffle;
+  onClick?: (id: string) => void;
+}) {
   return (
     <div className="bg-black/65 rounded-xl">
       <Card
@@ -17,7 +23,10 @@ export default function FinishedRaffleCard({ raffle }: { raffle: Raffle }) {
             src={raffle.cover_url}
           />
         </CardBody>
-        <CardBody className="py-4 px-2 flex items-start ms-4 space-y-4 flex-col">
+        <CardBody
+          onClick={() => onClick?.(raffle.id)}
+          className="py-4 px-2 flex items-start ms-4 space-y-4 cursor-pointer flex-col"
+        >
           <p className="text-tiny uppercase font-bold">
             Prêmio: {raffle.prize_name}
           </p>

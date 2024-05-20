@@ -21,12 +21,13 @@ export const useGetAllRaffles = (opt?: GetAllRafflesHookParams) => {
     return data.raffles as Raffle[];
   };
 
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["allRaffles"],
     queryFn: fetchAllRaffles,
   });
 
   return {
     raffles: data,
+    isLoading,
   };
 };

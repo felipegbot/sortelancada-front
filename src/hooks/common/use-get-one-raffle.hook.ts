@@ -10,12 +10,13 @@ export const useGetOneRaffle = (id: string) => {
     return data.raffle as Raffle;
   };
 
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["oneRaffle", id],
     queryFn: fetchRaffle,
   });
 
   return {
     raffle: data,
+    isLoading,
   };
 };

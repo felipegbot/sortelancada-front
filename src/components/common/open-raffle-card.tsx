@@ -15,10 +15,10 @@ export default function OpenRaffleCard({
   onClick,
 }: {
   raffle: Raffle;
-  onClick?: () => void;
+  onClick?: (id: string) => void;
 }) {
   return (
-    <div className="bg-black/65 rounded-xl cursor-pointer" onClick={onClick}>
+    <div className="bg-black/65 rounded-xl">
       <Card className="p-4 rounded-xl bg-background w-full" isBlurred>
         <CardBody className="overflow-visible py-2">
           <div
@@ -50,7 +50,10 @@ export default function OpenRaffleCard({
             </Carousel>
           </div>
         </CardBody>
-        <CardHeader className="pb-4 pt-2 px-4 flex-col items-start space-y-2">
+        <CardHeader
+          onClick={() => onClick?.(raffle.id)}
+          className="pb-4 cursor-pointer pt-2 px-4 flex-col items-start space-y-2"
+        >
           <span className="font-bold text-large whitespace-pre-line">
             {raffle.name}
           </span>
@@ -64,7 +67,10 @@ export default function OpenRaffleCard({
             <RaffleStatusBadge status={raffle.status} />
           </div>
         </CardHeader>
-        <CardFooter className="flex text-center  justify-center bg-green-500 text-white px-2 py-1 rounded-full mt-4 cursor-pointer animate-pulse">
+        <CardFooter
+          onClick={() => onClick?.(raffle.id)}
+          className="flex text-center justify-center bg-green-500 text-white px-2 py-1 rounded-full mt-4 cursor-pointer animate-pulse"
+        >
           COMPRAR COTA
         </CardFooter>
       </Card>
