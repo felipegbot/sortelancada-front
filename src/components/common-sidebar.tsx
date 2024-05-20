@@ -110,7 +110,6 @@ export const CommonSidebarComponent = ({
                   label="Cadastro/Login"
                   icon={<UserPlus />}
                   onClick={() => {
-                    console.log("Create common user");
                     setIsModalOpen(true);
                   }}
                 />

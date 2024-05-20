@@ -13,8 +13,10 @@ import RaffleStatusBadge from "./raffle-status-badge";
 export default function OpenRaffleCard({
   raffle,
   onClick,
+  canBuy = true,
 }: {
   raffle: Raffle;
+  canBuy?: boolean;
   onClick?: (id: string) => void;
 }) {
   return (
@@ -67,12 +69,14 @@ export default function OpenRaffleCard({
             <RaffleStatusBadge status={raffle.status} />
           </div>
         </CardHeader>
-        <CardFooter
-          onClick={() => onClick?.(raffle.id)}
-          className="flex text-center justify-center bg-green-500 text-white px-2 py-1 rounded-full mt-4 cursor-pointer animate-pulse"
-        >
-          COMPRAR COTA
-        </CardFooter>
+        {canBuy && (
+          <CardFooter
+            onClick={() => onClick?.(raffle.id)}
+            className="flex text-center justify-center bg-green-500 text-white px-2 py-1 rounded-full mt-4 cursor-pointer animate-pulse"
+          >
+            COMPRAR COTA
+          </CardFooter>
+        )}
       </Card>
     </div>
   );

@@ -6,7 +6,7 @@ import { CircleMinus, CirclePlus } from "lucide-react";
 import { useState } from "react";
 
 export default function BuyGrid({ raffle }: { raffle: Raffle }) {
-  const options = [1, 5, 10, 50];
+  const options = [5, 10, 50, 100];
   const [quantity, setQuantity] = useState(raffle.min_quantity);
 
   const handleQuantityChange = (value: number) => {
@@ -27,8 +27,8 @@ export default function BuyGrid({ raffle }: { raffle: Raffle }) {
         <span className="text-xl text-center">
           Adicione quantidades fixas ou uma por uma se preferir!
         </span>
-        <span className="text-tiny text-center uppercase">
-          é possível comprar de {raffle.min_quantity} até 99999 cotas por vez
+        <span className="text-center">
+          Compra mínima de {raffle.min_quantity} cotas
         </span>
         <div className="grid grid-cols-1 md:grid-cols-2">
           {options.map((option) => (

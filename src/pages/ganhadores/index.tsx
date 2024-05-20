@@ -8,7 +8,7 @@ export default function Home() {
     status: RaffleStatus.FINISHED,
   });
   return (
-    <Skeleton isLoaded={!isLoading} className="rounded-xl min-h-screen">
+    <Skeleton isLoaded={!isLoading} className="rounded-xl">
       <div className="space-y-4 my-8 h-full w-full flex flex-col justify-center items-center">
         {raffles && <RafflesList raffles={new Array(10).fill(raffles[0])} />}
       </div>

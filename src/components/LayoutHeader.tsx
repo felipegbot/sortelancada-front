@@ -29,12 +29,14 @@ export default function LayoutHeader() {
       <span className="max-md:text-tiny h-full flex items-center">
         AS MELHORES AÇÕES E PRÊMIOS 🍀
       </span>
-      <div className="p-2 w-[70px] h-[70px]">
-        <img src="/logo.svg" />
-      </div>
-      {isAdmin && (
+
+      {isAdmin ? (
         <div className="p-4">
           <CircleUser />
+        </div>
+      ) : (
+        <div className="p-2 w-[70px] h-[70px]">
+          <img src="/logo.svg" />
         </div>
       )}
     </div>
