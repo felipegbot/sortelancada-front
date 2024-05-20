@@ -65,7 +65,7 @@ export default function BuyGrid({ raffle }: { raffle: Raffle }) {
             />
           </div>
           <Button variant="ghost" color="success">
-            Finalizar Compra
+            Finalizar Compra!
           </Button>
         </div>
       </Card>
