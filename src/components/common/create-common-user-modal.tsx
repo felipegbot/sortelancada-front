@@ -15,6 +15,7 @@ import Api from "@/common/api";
 import { toast } from "react-toastify";
 import { setCommonUserData } from "@/lib/redux/reducers/common-user.reducer";
 import { toastError } from "@/lib/toastError";
+import { useMask } from "@react-input/mask";
 
 interface CreateCommonUserModalProps {
   isOpen: boolean;
@@ -26,6 +27,10 @@ export default function CreateCommonUserModal({
   closeModal,
 }: CreateCommonUserModalProps) {
   const dispatch = useAppDispatch();
+  const inputRef = useMask({
+    mask: "(__) _____-____",
+    replacement: { _: /\d/ },
+  });
 
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -84,12 +89,15 @@ export default function CreateCommonUserModal({
                   onValueChange={setName}
                   type="text"
                   label="Nome completo"
+                  placeholder="Fulano da Silva"
                 />
                 <Input
                   value={phone}
                   onValueChange={setPhone}
                   type="text"
                   label="Telefone"
+                  placeholder="(99) 99999-9999"
+                  ref={inputRef}
                 />
               </ModalBody>
               <ModalFooter>

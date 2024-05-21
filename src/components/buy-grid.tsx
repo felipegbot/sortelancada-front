@@ -4,8 +4,15 @@ import { Button } from "@nextui-org/button";
 import { Card } from "@nextui-org/card";
 import { CircleMinus, CirclePlus } from "lucide-react";
 import { useState } from "react";
+import currencyFormatter from "@/lib/currency-formatter";
 
-export default function BuyGrid({ raffle }: { raffle: Raffle }) {
+export default function BuyGrid({
+  raffle,
+  onBuyCallback,
+}: {
+  raffle: Raffle;
+  onBuyCallback: (qtd: number) => void;
+}) {
   const options = [5, 10, 50, 100];
   const [quantity, setQuantity] = useState(raffle.min_quantity);
 
@@ -46,25 +53,34 @@ export default function BuyGrid({ raffle }: { raffle: Raffle }) {
         </div>
         <div className="flex flex-col items-center">
           <span>Você está comprando</span>
-          <div className="w-full flex flex-row mt-4 mb-6 space-x-2 items-center">
-            <CircleMinus
-              className="cursor-pointer h-full w-12"
-              onClick={() => handleQuantityChange(quantity - 1)}
-            />
-            <InputMask
-              value={quantity}
-              onChange={handleInputQuantityChange}
-              mask="_____"
-              showMask={false}
-              className="bg-green-800 w-full py-2 rounded-xl text-center text-xl"
-              replacement={{ _: /\d/ }}
-            />
-            <CirclePlus
-              className="cursor-pointer h-full w-12"
-              onClick={() => handleQuantityChange(quantity + 1)}
-            />
+          <div className="flex w-full flex-col items-center mb-6">
+            <div className="w-full flex flex-row my-4 space-x-2 items-center">
+              <CircleMinus
+                className="cursor-pointer h-full w-12"
+                onClick={() => handleQuantityChange(quantity - 1)}
+              />
+              <InputMask
+                value={quantity}
+                onChange={handleInputQuantityChange}
+                mask="_____"
+                showMask={false}
+                className="bg-green-800 w-full py-2 rounded-xl text-center text-xl"
+                replacement={{ _: /\d/ }}
+              />
+              <CirclePlus
+                className="cursor-pointer h-full w-12"
+                onClick={() => handleQuantityChange(quantity + 1)}
+              />
+            </div>
+            <span>
+              Total: {currencyFormatter.format(quantity * raffle.price_number)}
+            </span>
           </div>
-          <Button variant="ghost" color="success">
+          <Button
+            variant="ghost"
+            color="success"
+            onClick={() => onBuyCallback(quantity)}
+          >
             Finalizar Compra!
           </Button>
         </div>
