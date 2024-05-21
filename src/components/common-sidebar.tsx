@@ -1,4 +1,4 @@
-import { ReactElement, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import {
   ChevronLeft,
   CircleDollarSign,
@@ -17,6 +17,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/store";
 import { clearCommonUserData } from "@/lib/redux/reducers/common-user.reducer";
+import { useRouter } from "next/router";
+import Api from "@/common/api";
+import { RaffleStatus } from "@/common/enum/raffle-status.enum";
 
 const SidebarFunctionItem: React.FC<{
   label: string;
@@ -67,6 +70,19 @@ export const CommonSidebarComponent = ({
   if (["/login", "/create-account", "/logout"].includes(location)) return null;
   const { name, phone } = useAppSelector((state) => state.commonUserReducer);
   const dispatch = useAppDispatch();
+  const [currentRaffleId, setCurrentRaffleId] = useState(null);
+
+  const fetchCurrentRaffle = async () => {
+    const { data } = await Api.get(`/raffles/list?status=${RaffleStatus.OPEN}`);
+    const currentRaffle = data.raffles[0];
+    if (!currentRaffle) return;
+
+    setCurrentRaffleId(currentRaffle.id);
+  };
+
+  useEffect(() => {
+    fetchCurrentRaffle();
+  }, []);
 
   return (
     <>
@@ -115,11 +131,10 @@ export const CommonSidebarComponent = ({
                 />
               ) : null}
               <SidebarItem
-                // TODO: implementar a logica para redirecionar à rifa ativa
-                isSelected={location === "/rifas"}
+                isSelected={location === `/rifas/${currentRaffleId}`}
                 label="Compra Rápida"
                 icon={<Zap />}
-                url="/rifas"
+                url={`/rifas/${currentRaffleId}?compra-rapida=true`}
               />
               <SidebarItem
                 isSelected={location === "/rifas"}
