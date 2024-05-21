@@ -14,13 +14,14 @@ import { toastError } from "@/lib/toastError";
 import Api from "@/common/api";
 import { toast } from "react-toastify";
 import CreateCommonUserModal from "@/components/common/create-common-user-modal";
+import { useRouter } from "next/router";
 
 export default function RafflePage() {
   const [creatingPayment, setCreatingPayment] = useState(false);
   const { name, phone } = useAppSelector((state) => state.commonUserReducer);
   const params = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const router = useRouter();
   const { raffle, isLoading } = useGetOneRaffle(
     params?.id ? (params.id as string) : "",
   );
@@ -39,7 +40,7 @@ export default function RafflePage() {
         raffle_id: raffle?.id,
       });
       toast.success("Pagamento criado com sucesso!");
-      console.log(data);
+      router.push(`/pagamentos/${data.payment.id}`);
     } catch (error) {
       toastError(error);
     } finally {

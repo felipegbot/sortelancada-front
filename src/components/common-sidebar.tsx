@@ -128,10 +128,10 @@ export const CommonSidebarComponent = ({
                 url="/rifas"
               />
               <SidebarItem
-                isSelected={location === "/tickets"}
+                isSelected={location === "/minhas-cotas"}
                 label="Minhas Cotas"
                 icon={<Ticket />}
-                url="/tickets"
+                url="/minhas-cotas"
               />
               <SidebarItem
                 isSelected={location === "/ganhadores"}
