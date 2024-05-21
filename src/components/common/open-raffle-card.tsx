@@ -24,6 +24,7 @@ export default function OpenRaffleCard({
       <Card className="p-4 rounded-xl bg-background w-full" isBlurred>
         <CardBody className="overflow-visible py-2">
           <div
+            onClick={() => onClick?.(raffle.id)}
             className="flex items-center justify-center rounded-xl"
             style={{ maxHeight: 450, overflow: "hidden" }}
           >

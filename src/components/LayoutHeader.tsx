@@ -11,6 +11,9 @@ export default function LayoutHeader() {
   const toggleIsOpen = () => {
     setIsOpen(!isOpen);
   };
+  const handleClickHome = () => {
+    router.push(`/`);
+  };
   return (
     <div className="w-full h-[72px] bg-black sticky top-0 flex flex-row justify-between z-50">
       <div className="absolute">
@@ -26,7 +29,10 @@ export default function LayoutHeader() {
       >
         <Menu />
       </div>
-      <span className="max-md:text-tiny h-full flex items-center">
+      <span
+        onClick={handleClickHome}
+        className="max-md:text-tiny h-full flex items-center cursor-pointer"
+      >
         AS MELHORES AÇÕES E PRÊMIOS 🍀
       </span>
 
@@ -35,7 +41,10 @@ export default function LayoutHeader() {
           <CircleUser />
         </div>
       ) : (
-        <div className="p-2 w-[70px] h-[70px]">
+        <div
+          onClick={handleClickHome}
+          className="p-2 w-[70px] h-[70px] cursor-pointer"
+        >
           <img src="/logo.svg" />
         </div>
       )}

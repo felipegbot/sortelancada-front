@@ -14,7 +14,7 @@ export default function RafflesList({ raffles }: { raffles: Raffle[] }) {
 
   const router = useRouter();
   const handleClick = (raffleId: string) => {
-    router.push(`/rifas/${raffleId}`);
+    router.push(`/rifas/${raffleId}?compra-rapida=true`);
   };
   return (
     <div className="space-y-4 h-full w-full ">

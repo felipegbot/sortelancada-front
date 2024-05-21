@@ -1,13 +1,13 @@
 import BuyGrid from "@/components/buy-grid";
 import OpenRaffleCard from "@/components/common/open-raffle-card";
 import { useGetOneRaffle } from "@/hooks/common/use-get-one-raffle.hook";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import { Skeleton } from "@nextui-org/skeleton";
 import { RaffleStatus } from "@/common/enum/raffle-status.enum";
 import WinnersContainer from "@/components/winners-container";
 import RaffleDescription from "@/components/raffle-description";
 import { CircularProgress } from "@nextui-org/progress";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Card } from "@nextui-org/card";
 import { useAppSelector } from "@/lib/redux/store";
 import { toastError } from "@/lib/toastError";
@@ -20,11 +20,23 @@ export default function RafflePage() {
   const [creatingPayment, setCreatingPayment] = useState(false);
   const { name, phone } = useAppSelector((state) => state.commonUserReducer);
   const params = useParams();
+  const searchParams = useSearchParams();
+  const buyGridRef = useRef<null | HTMLDivElement>(null);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
   const { raffle, isLoading } = useGetOneRaffle(
     params?.id ? (params.id as string) : "",
   );
+
+  useEffect(() => {
+    const isScroll = searchParams.get("compra-rapida");
+    if (isScroll == "true" && window && buyGridRef?.current)
+      window.scrollTo({
+        top: buyGridRef?.current?.offsetTop,
+        behavior: "smooth",
+      });
+  }, [params, raffle]);
 
   const handleBuy = async (amount: number) => {
     try {
@@ -74,10 +86,12 @@ export default function RafflePage() {
               </Card>
             </div>
           ) : (
-            <BuyGrid
-              raffle={raffle}
-              onBuyCallback={(qtd: number) => handleBuy(qtd)}
-            />
+            <div ref={buyGridRef}>
+              <BuyGrid
+                raffle={raffle}
+                onBuyCallback={(qtd: number) => handleBuy(qtd)}
+              />
+            </div>
           ))}
         {raffle?.status === RaffleStatus.FINISHED && (
           <WinnersContainer raffle={raffle} />
