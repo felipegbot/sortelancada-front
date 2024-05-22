@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import { store } from "@/lib/redux/store";
 import { ToastContainer } from "react-toastify";
 import TitleWithLogo from "@/components/title-with-logo";
+import Footer from "@/components/footer";
 
 export default function App({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <Component {...pageProps} />
           </div>
         </div>
+        <Footer />
       </Provider>
     </QueryClientProvider>
   );
