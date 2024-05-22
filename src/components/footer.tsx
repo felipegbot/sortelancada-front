@@ -7,23 +7,23 @@ export default function Footer() {
       <div className="flex flex-row space-x-4">
         <img
           src="/whatsapp.svg"
-          className="bg-white rounded-xl"
-          height={35}
-          width={35}
+          className="bg-white rounded-xl my-1"
+          height={40}
+          width={40}
         />
         <img
           src="/facebook.svg"
-          className="bg-white rounded-xl"
-          height={35}
-          width={35}
+          className="bg-white rounded-xl my-1"
+          height={40}
+          width={40}
         />
-        <img src="/instagram.svg" height={35} width={35} />
+        <img src="/instagram.svg" height={35} width={45} />
 
         <img
-          className="bg-white rounded-xl"
+          className="bg-white rounded-xl my-1"
           src="/telegram.svg"
-          height={35}
-          width={35}
+          height={40}
+          width={40}
         />
       </div>
       <div className="max-w-[90vw] space-y-2">
@@ -32,7 +32,7 @@ export default function Footer() {
         menores de dezesseis anos. Antes de contratar consulte previamente as
         Condições Gerais. As condições contratuais/regulamento deste produto.
         Confira o resultado dos sorteios e as condições de participação em nossa
-        página. Imagens meramente ilustrativas.{" "}
+        página. Imagens meramente ilustrativas.
         <span className="inline-block">
           © 2024 - Todos os direitos reservados
         </span>
