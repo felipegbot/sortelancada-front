@@ -66,7 +66,6 @@ export const CommonSidebarComponent = ({
 }) => {
   const location = usePathname();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  if (["/login", "/create-account", "/logout"].includes(location)) return null;
   const { name, phone } = useAppSelector((state) => state.commonUserReducer);
   const dispatch = useAppDispatch();
   const [currentRaffleId, setCurrentRaffleId] = useState(null);

@@ -5,10 +5,11 @@ import { redirect } from "next/navigation";
 const headers = {
   Accept: "application/json",
   "Content-Type": "application/json",
+  "ngrok-skip-browser-warning": "69420",
 };
 
 const Api = axios.create({
-  baseURL: "http://192.168.12.13:1337",
+  baseURL: "https://4990-2804-8be0-104-f00-263b-7f69-8287-9591.ngrok-free.app",
   headers,
 });
 
