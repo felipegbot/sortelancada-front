@@ -5,7 +5,6 @@ import { Skeleton } from "@nextui-org/skeleton";
 import FinishedRaffleCard from "./finished-raffles-card";
 import OpenRaffleCard from "./open-raffle-card";
 import PaymentCard from "./payment-card";
-import { Card } from "@nextui-org/card";
 
 export default function MyTicketsCard({
   raffle_id,

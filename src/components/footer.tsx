@@ -7,32 +7,40 @@ export default function Footer() {
       <div className="flex flex-row space-x-4">
         <img
           src="/whatsapp.svg"
-          className="bg-white rounded-xl my-1"
+          className="bg-white cursor-pointer rounded-xl my-1"
+          onClick={() => window.open("https://bit.ly/3tVdllq", "_blank")}
           height={40}
           width={40}
         />
         <img
           src="/facebook.svg"
-          className="bg-white rounded-xl my-1"
+          className="bg-white cursor-pointer rounded-xl my-1"
+          onClick={() => window.open("https://bit.ly/4b7v8GG", "_blank")}
           height={40}
           width={40}
         />
-        <img src="/instagram.svg" height={35} width={45} />
+        <img
+          src="/instagram.svg"
+          className="cursor-pointer"
+          height={35}
+          width={45}
+          onClick={() => window.open("https://bit.ly/4blp1ia", "_blank")}
+        />
 
         <img
-          className="bg-white rounded-xl my-1"
+          className="bg-white cursor-pointer rounded-xl my-1"
+          onClick={() => window.open("https://t.me/sortelancada", "_blank")}
           src="/telegram.svg"
           height={40}
           width={40}
         />
       </div>
       <div className="max-w-[90vw] space-y-2">
-        Título de Capitalização da Modalidade Filantropia Premiável de
-        Contribuição Única. É proibida a venda de título de capitalização a
-        menores de dezesseis anos. Antes de contratar consulte previamente as
-        Condições Gerais. As condições contratuais/regulamento deste produto.
-        Confira o resultado dos sorteios e as condições de participação em nossa
-        página. Imagens meramente ilustrativas.
+        <span className="block">
+          As condições contratuais/regulamento deste produto estão nos “Termos
+          de uso”. Confira o resultado dos sorteios e as condições de
+          participação em nossa página. Imagens meramente ilustrativas.
+        </span>
         <span className="inline-block">
           © 2024 - Todos os direitos reservados
         </span>
@@ -42,14 +50,7 @@ export default function Footer() {
           <div> Política de Privacidade</div>
         </div>
         <div className="flex flex-row w-full space-x-1 justify-center">
-          <div>Sistema desenvolvido por sortelancada.com e</div>
-          <a
-            className="underline text-blue-500"
-            href="https://www.linkedin.com/in/felipe-gabriel-botelho/"
-            target="_blank"
-          >
-            Felipe Botelho
-          </a>
+          <div>Sistema desenvolvido por sortelancada.com</div>
         </div>
       </div>
     </div>

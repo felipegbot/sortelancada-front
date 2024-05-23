@@ -15,6 +15,9 @@ import Api from "@/common/api";
 import { toast } from "react-toastify";
 import CreateCommonUserModal from "@/components/common/create-common-user-modal";
 import { useRouter } from "next/router";
+import currencyFormatter from "@/lib/currency-formatter";
+import GiftPrizesGrid from "@/components/common/gift-prizes-grid";
+import { formatNumberToFitZeros } from "@/common/helpers/format-number-to-fit-zeros";
 
 export default function RafflePage() {
   const [creatingPayment, setCreatingPayment] = useState(false);
@@ -25,10 +28,11 @@ export default function RafflePage() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
-  const { raffle, isLoading } = useGetOneRaffle(
-    params?.id ? (params.id as string) : "",
-  );
-
+  const {
+    raffle,
+    isLoading,
+    winners = [],
+  } = useGetOneRaffle(params?.id ? (params.id as string) : "", true);
   useEffect(() => {
     const isScroll = searchParams.get("compra-rapida");
     if (isScroll == "true" && window && buyGridRef?.current)
@@ -72,8 +76,45 @@ export default function RafflePage() {
           <OpenRaffleCard
             raffle={raffle}
             canBuy={raffle.status === RaffleStatus.OPEN}
+            additionalInfo={
+              <div className="flex flex-col items-start space-y-2 mt-3">
+                <div>
+                  Por apenas
+                  <span className="rounded-xl ml-2 px-2 py-1 bg-green-800">
+                    {currencyFormatter.format(raffle.price_number)}
+                  </span>
+                </div>
+                {raffle.date_description && (
+                  <div>
+                    Sorteio loteria federal:{" "}
+                    <span className="font-bold text-green-600">
+                      {raffle.date_description}
+                    </span>
+                  </div>
+                )}
+              </div>
+            }
           />
         )}
+        {raffle?.status === RaffleStatus.OPEN && (
+          <div className="bg-black/65 rounded-xl">
+            <Card isBlurred className="p-4 items-center space-y-4">
+              <div className="flex flex-row items-center">
+                <div className="flex flex-col pl-4">
+                  <span>Muitas chances de ganhar na hora! 🍀</span>
+                  <span className="font-bold text-tiny md:text-medium">
+                    ainda restam {raffle.gift_numbers.length - winners.length}{" "}
+                    cotas premiadas! 🎫
+                  </span>
+                </div>
+                <div className="md:pl-4">
+                  <img src="/logo.svg" className="h-12 w-12" />
+                </div>
+              </div>
+            </Card>
+          </div>
+        )}
+
         {raffle?.status === RaffleStatus.OPEN &&
           (creatingPayment ? (
             <div className="bg-black/65 rounded-xl">
@@ -95,6 +136,15 @@ export default function RafflePage() {
           ))}
         {raffle?.status === RaffleStatus.FINISHED && (
           <WinnersContainer raffle={raffle} />
+        )}
+        {raffle?.status === RaffleStatus.OPEN && (
+          <GiftPrizesGrid
+            prizeNumbers={formatNumberToFitZeros(
+              raffle.gift_numbers,
+              raffle.initial_numbers_qtd.toString().length,
+            )}
+            urnWinners={winners}
+          />
         )}
       </div>
       <div className="mt-4">

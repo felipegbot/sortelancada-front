@@ -5,13 +5,14 @@ export interface Raffle {
   id: string;
   name: string;
   description: string;
+  date_description?: string;
   medias_url: string[];
   prize_name: string;
   status: RaffleStatus;
   min_quantity: number;
   cover_url?: string;
   prize_number: number;
-  gift_numbers: number[];
+  gift_numbers: string[];
   gift_numbers_winners: string;
   available_numbers: number[];
   available_numbers_qtd: number;

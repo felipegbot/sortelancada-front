@@ -1,13 +1,21 @@
 import Api from "@/common/api";
 import { Raffle } from "@/common/interfaces/raffles.interface";
+import { UsersRaffleNumber } from "@/common/interfaces/users-raffle-number.interface";
 import { useQuery } from "@tanstack/react-query";
 
-export const useGetOneRaffle = (id: string) => {
-  const fetchRaffle = async (): Promise<Raffle> => {
+interface GetOneRaffleRespose {
+  raffle: Raffle;
+  percentage: number;
+  winners: UsersRaffleNumber[];
+}
+
+export const useGetOneRaffle = (id: string, withGiftWinners?: boolean) => {
+  const fetchRaffle = async (): Promise<GetOneRaffleRespose> => {
     let url = `/raffles/${id}`;
+    if (withGiftWinners) url = url + "?with-gift-winners=true";
 
     const { data } = await Api.get(url);
-    return data.raffle as Raffle;
+    return data as GetOneRaffleRespose;
   };
 
   const { data, isLoading } = useQuery({
@@ -16,7 +24,9 @@ export const useGetOneRaffle = (id: string) => {
   });
 
   return {
-    raffle: data,
+    raffle: data?.raffle,
+    percentage: data?.percentage,
+    winners: data?.winners,
     isLoading,
   };
 };

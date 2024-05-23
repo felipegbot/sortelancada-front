@@ -14,10 +14,12 @@ export default function OpenRaffleCard({
   raffle,
   onClick,
   canBuy = true,
+  additionalInfo,
 }: {
   raffle: Raffle;
   canBuy?: boolean;
   onClick?: (id: string) => void;
+  additionalInfo?: React.ReactNode;
 }) {
   return (
     <div className="bg-black/65 rounded-xl">
@@ -78,6 +80,7 @@ export default function OpenRaffleCard({
             COMPRAR COTA
           </CardFooter>
         )}
+        {additionalInfo}
       </Card>
     </div>
   );

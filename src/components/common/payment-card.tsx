@@ -1,5 +1,4 @@
 import { PaymentStatus } from "@/common/enum/payment-status.enum";
-import translatePaymentStatus from "@/common/helpers/translate-payment-status";
 import { Payment } from "@/common/interfaces/payments.interface";
 import currencyFormatter from "@/lib/currency-formatter";
 import mmt from "@/lib/mmt";
