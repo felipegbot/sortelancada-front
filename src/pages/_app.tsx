@@ -23,6 +23,15 @@ export default function App({ Component, pageProps }: AppProps) {
             <Component {...pageProps} />
           </div>
         </div>
+        <div className="w-full cursor-pointer sticky pr-4 bottom-10 right-0 bg-none flex justify-end">
+          <div
+            className="bg-black flex-row flex px-2 py-1 space-x-1 rounded-xl"
+            onClick={() => window.open("https://bit.ly/3tVdllq", "_blank")}
+          >
+            <span>Suporte</span>
+            <img src="/whatsapp.svg" height={20} width={20} />
+          </div>
+        </div>
         <Footer />
       </Provider>
     </QueryClientProvider>

@@ -17,7 +17,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/store";
 import { clearCommonUserData } from "@/lib/redux/reducers/common-user.reducer";
-import { useRouter } from "next/router";
 import Api from "@/common/api";
 import { RaffleStatus } from "@/common/enum/raffle-status.enum";
 
@@ -98,7 +97,7 @@ export const CommonSidebarComponent = ({
             width: isOpen ? 224 : 0,
           }}
         >
-          <div className={`flex flex-col h-full justify-between`}>
+          <div className={`flex flex-col h-full mb-10 justify-between`}>
             <div className="space-y-4">
               <div className="flex items-center flex-row align-center justify-evenly my-3 p-0 shadow pb-[11px]">
                 <img

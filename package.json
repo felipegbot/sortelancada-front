@@ -11,6 +11,7 @@
   "dependencies": {
     "@brazilian-utils/is-valid-phone": "^0.1.1",
     "@mona-health/react-input-mask": "^3.0.3",
+    "@nextui-org/accordion": "^2.0.32",
     "@nextui-org/badge": "^2.0.27",
     "@nextui-org/button": "^2.0.31",
     "@nextui-org/card": "^2.0.28",

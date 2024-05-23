@@ -2,7 +2,7 @@ import { Raffle } from "@/common/interfaces/raffles.interface";
 import { InputMask } from "@react-input/mask";
 import { Button } from "@nextui-org/button";
 import { Card } from "@nextui-org/card";
-import { CircleMinus, CirclePlus } from "lucide-react";
+import { CircleDollarSign, CircleMinus, CirclePlus } from "lucide-react";
 import { useState } from "react";
 import currencyFormatter from "@/lib/currency-formatter";
 
@@ -72,8 +72,15 @@ export default function BuyGrid({
                 onClick={() => handleQuantityChange(quantity + 1)}
               />
             </div>
-            <span>
-              Total: {currencyFormatter.format(quantity * raffle.price_number)}
+            <span className="bg-green-800 rounded-xl w-full p-4 flex flex-row justify-between items-center">
+              <div className="space-x-1 flex font-bold flex-row">
+                <CircleDollarSign color="yellow" />
+                <span> Quero participar</span>
+              </div>
+              <span>
+                {" "}
+                {currencyFormatter.format(quantity * raffle.price_number)}
+              </span>
             </span>
           </div>
           <Button
