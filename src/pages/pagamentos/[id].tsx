@@ -25,7 +25,8 @@ export default function PaymentDetailPage() {
   const { seconds, minutes, restart } = useTimer({
     expiryTimestamp: payment?.expires_at,
     onExpire: () => {
-      toastError(new Error("Pagamento expirado!"));
+      if (payment.status === PaymentStatus.PENDING)
+        toastError(new Error("Pagamento expirado!"));
     },
   });
 
