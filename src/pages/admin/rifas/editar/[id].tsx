@@ -112,7 +112,7 @@ export default function Home() {
   const numberRef = useMask({ mask: "_______", replacement: { _: /\d/ } });
 
   return (
-    <Card isBlurred className="p-8 flex w-full">
+    <Card isBlurred className="p-8 flex w-full max-w-7xl">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="w-full flex flex-col bg-red-5 space-y-6 items-center justify-center z-20"

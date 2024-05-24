@@ -2,12 +2,12 @@ import { useRouter } from "next/router";
 import { CommonSidebarComponent } from "./common-sidebar";
 import { useState } from "react";
 import { CircleUser, Menu } from "lucide-react";
+import { AdminSidebarComponent } from "./admin/admin-sidebar";
 
 export default function LayoutHeader() {
   const router = useRouter();
-  const AdminSidebarComponent = () => <div>Admin Sidebar</div>;
   const [isOpen, setIsOpen] = useState(false);
-  const isAdmin = router.pathname.startsWith(`/admin`);
+  const isAdmin = router.pathname.includes(`admin`);
   const toggleIsOpen = () => {
     setIsOpen(!isOpen);
   };
@@ -18,7 +18,7 @@ export default function LayoutHeader() {
     <div className="w-full h-[72px] bg-black sticky top-0 flex flex-row justify-between z-50">
       <div className="absolute">
         {isAdmin ? (
-          <AdminSidebarComponent />
+          <AdminSidebarComponent isOpen={isOpen} toggleIsOpen={toggleIsOpen} />
         ) : (
           <CommonSidebarComponent isOpen={isOpen} toggleIsOpen={toggleIsOpen} />
         )}

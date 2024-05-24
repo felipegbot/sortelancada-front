@@ -1,4 +1,3 @@
-import isAuth from "@/common/guard/isAuth";
 import { useGetRafflesHook } from "@/hooks/admin/get-raffles.hook";
 import mmt from "@/lib/mmt";
 import { Button } from "@nextui-org/button";
@@ -21,7 +20,7 @@ export function Home() {
     <div className="w-full h-min rounded-xl flex justify-center">
       <Card
         isBlurred
-        className="flex space-y-4 p-8 justify-center items-center w-full"
+        className="flex space-y-4 max-w-7xl p-8 justify-center items-center w-full"
       >
         <div className="w-full flex flex-row justify-between">
           <span className="text-2xl w-1/2 text-end">Suas rifas</span>
