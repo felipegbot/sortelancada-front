@@ -14,13 +14,13 @@ import isAuth from "@/common/guard/isAuth";
 export default function App({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient();
   const pathname = usePathname();
-  if (pathname.includes("admin")) isAuth();
+  if (pathname?.includes("admin")) isAuth();
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
         <ToastContainer theme="dark" />
         <LayoutHeader />
-        {pathname.includes("admin") ? (
+        {pathname && pathname?.includes("admin") ? (
           <div className="min-h-screen bg-fixed bg-contain md:bg-cover bg-left-top bg-repeat-y bg-[url('/background-img-nobg.png')] p-8 w-full h-full flex justify-center overflow-y-auto">
             <Component {...pageProps} />
           </div>
@@ -37,7 +37,7 @@ export default function App({ Component, pageProps }: AppProps) {
                 className="bg-black flex-row flex px-2 py-1 space-x-1 rounded-xl"
                 onClick={() => window.open("https://bit.ly/3tVdllq", "_blank")}
               >
-                <span>Suporte</span>
+                <span className="font-bold">Suporte</span>
                 <img src="/whatsapp.svg" height={20} width={20} />
               </div>
             </div>

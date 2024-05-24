@@ -26,7 +26,7 @@ export default function OpenRaffleCard({
       <Card className="p-4 rounded-xl bg-background w-full" isBlurred>
         <CardBody className="overflow-visible py-2">
           <div
-            onClick={() => onClick?.(raffle.id)}
+            onClick={() => canBuy && onClick?.(raffle.id)}
             className="flex items-center justify-center rounded-xl"
             style={{ maxHeight: 450, overflow: "hidden" }}
           >
@@ -56,17 +56,15 @@ export default function OpenRaffleCard({
           </div>
         </CardBody>
         <CardHeader
-          onClick={() => onClick?.(raffle.id)}
+          onClick={() => canBuy && onClick?.(raffle.id)}
           className="pb-4 cursor-pointer pt-2 px-4 flex-col items-start space-y-2"
         >
           <span className="font-bold text-large whitespace-pre-line">
             {raffle.name}
           </span>
-          <p className="text-tiny uppercase font-bold">
-            Prêmio: {raffle.prize_name}
-          </p>
+          <p className="uppercase font-bold">Prêmio: {raffle.prize_name}</p>
           <div className="flex w-full items-center flex-row justify-between">
-            <span className="text-tiny font-bold">
+            <span className="font-bold">
               {currencyFormatter.format(raffle.price_number)}/cota
             </span>
             <RaffleStatusBadge status={raffle.status} />

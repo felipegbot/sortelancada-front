@@ -53,7 +53,12 @@ export function Home() {
                       {mmt(raffle.updated_at).format("DD-MM-YYYY HH:mm:ss")}
                     </TableCell>
                     <TableCell>
-                      <div className="cursor-pointer transition-all hover:text-green-500">
+                      <div
+                        onClick={() =>
+                          router.push(`/admin/rifas/editar/${raffle.id}`)
+                        }
+                        className="cursor-pointer transition-all hover:text-green-500"
+                      >
                         <Pencil />
                       </div>
                     </TableCell>

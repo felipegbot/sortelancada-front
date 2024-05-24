@@ -18,7 +18,7 @@ export const useGetOneRaffle = (id: string, withGiftWinners?: boolean) => {
     return data as GetOneRaffleRespose;
   };
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ["oneRaffle", id],
     queryFn: fetchRaffle,
   });
@@ -26,6 +26,7 @@ export const useGetOneRaffle = (id: string, withGiftWinners?: boolean) => {
   return {
     raffle: data?.raffle,
     percentage: data?.percentage,
+    refetch,
     winners: data?.winners,
     isLoading,
   };

@@ -37,7 +37,10 @@ export default function LayoutHeader() {
       </span>
 
       {isAdmin ? (
-        <div className="p-4">
+        <div
+          className="p-4 w-[70px] h-[70px] cursor-pointer"
+          onClick={() => router.push("/admin")}
+        >
           <CircleUser />
         </div>
       ) : (

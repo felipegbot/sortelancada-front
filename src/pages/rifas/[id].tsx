@@ -102,7 +102,7 @@ export default function RafflePage() {
               <div className="flex flex-row items-center">
                 <div className="flex flex-col pl-4">
                   <span>Muitas chances de ganhar na hora! 🍀</span>
-                  <span className="font-bold text-tiny md:text-medium">
+                  <span className="font-bold md:text-medium">
                     ainda restam {raffle.gift_numbers.length - winners.length}{" "}
                     cotas premiadas! 🎫
                   </span>

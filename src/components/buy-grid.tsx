@@ -45,7 +45,7 @@ export default function BuyGrid({
               className="flex bg-black p-6 text-white rounded-2xl m-2 flex-col items-center justify-center space-y-2"
               onClick={() => handleQuantityChange(option + quantity)}
             >
-              <span className="font-bold">
+              <span className="font-bold text-lg">
                 + {option} cota{option > 1 ? "s" : ""}
               </span>
             </Button>
@@ -78,7 +78,6 @@ export default function BuyGrid({
                 <span> Quero participar</span>
               </div>
               <span>
-                {" "}
                 {currencyFormatter.format(quantity * raffle.price_number)}
               </span>
             </span>
@@ -86,6 +85,7 @@ export default function BuyGrid({
           <Button
             variant="ghost"
             color="success"
+            className="font-bold"
             onClick={() => onBuyCallback(quantity)}
           >
             Finalizar Compra!

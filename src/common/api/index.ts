@@ -9,7 +9,7 @@ const headers = {
 };
 
 const Api = axios.create({
-  baseURL: "https://4990-2804-8be0-104-f00-263b-7f69-8287-9591.ngrok-free.app",
+  baseURL: "http://192.168.12.13:1337",
   headers,
 });
 

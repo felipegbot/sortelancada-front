@@ -27,15 +27,13 @@ export default function FinishedRaffleCard({
           onClick={() => onClick?.(raffle.id)}
           className="py-4 px-2 flex items-start ms-4 space-y-4 cursor-pointer flex-col"
         >
-          <p className="text-tiny uppercase font-bold">
-            Prêmio: {raffle.prize_name}
-          </p>
-          <span className="text-tiny font-bold">
+          <p className="uppercase font-bold">Prêmio: {raffle.prize_name}</p>
+          <span className="font-bold">
             {currencyFormatter.format(raffle.price_number)}/cota
           </span>
           <span className="font-bold"> 🎫{raffle.prize_number}</span>{" "}
           {raffle.winner_common_user && (
-            <span className="text-tiny uppercase">
+            <span className="uppercase">
               👑 {censorUsername(raffle.winner_common_user.name)}
             </span>
           )}
