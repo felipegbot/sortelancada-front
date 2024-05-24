@@ -10,7 +10,7 @@ import {
   TableRow,
   TableCell,
 } from "@nextui-org/table";
-import { Pencil } from "lucide-react";
+import { CrownIcon, Pencil } from "lucide-react";
 import { useRouter } from "next/router";
 export function Home() {
   const { raffles } = useGetRafflesHook();
@@ -51,7 +51,7 @@ export function Home() {
                     <TableCell>
                       {mmt(raffle.updated_at).format("DD-MM-YYYY HH:mm:ss")}
                     </TableCell>
-                    <TableCell>
+                    <TableCell className="flex flex-row space-x-2">
                       <div
                         onClick={() =>
                           router.push(`/admin/rifas/editar/${raffle.id}`)
@@ -59,6 +59,14 @@ export function Home() {
                         className="cursor-pointer transition-all hover:text-green-500"
                       >
                         <Pencil />
+                      </div>
+                      <div
+                        onClick={() =>
+                          router.push(`/admin/rifas/${raffle.id}/vencedores`)
+                        }
+                        className="cursor-pointer transition-all hover:text-green-500"
+                      >
+                        <CrownIcon />
                       </div>
                     </TableCell>
                   </TableRow>

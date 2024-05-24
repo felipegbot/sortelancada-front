@@ -12,24 +12,31 @@ import {
   TableCell,
 } from "@nextui-org/table";
 import { Pagination } from "@nextui-org/pagination";
-import { Eye } from "lucide-react";
-import { useRouter } from "next/router";
+import { AlertCircle, Eye } from "lucide-react";
 import { Input } from "@nextui-org/input";
 import { useState } from "react";
 import PreviewPayment from "./preview-payment";
+import ForcePayment from "./force-payment";
+import { PaymentStatus } from "@/common/enum/payment-status.enum";
 
 export function Home() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false);
+  const [isForceModalOpen, setIsForceModalOpen] = useState(false);
   const [selectedPaymentId, setSelectedPaymentId] = useState<string>();
-  const { payments, page, setPage, total, perPage, setName, name, isLoading } =
+  const { payments, page, setPage, total, perPage, setName, name } =
     useGetPaginatedPayments();
-  const router = useRouter();
+
   const pages = Math.ceil(total / perPage);
   return (
     <div className="w-full h-min rounded-xl flex justify-center">
       <PreviewPayment
-        isOpen={isModalOpen}
-        closeModal={() => setIsModalOpen(false)}
+        isOpen={isPreviewModalOpen}
+        closeModal={() => setIsPreviewModalOpen(false)}
+        paymentId={selectedPaymentId ?? ""}
+      />
+      <ForcePayment
+        isOpen={isForceModalOpen}
+        closeModal={() => setIsForceModalOpen(false)}
         paymentId={selectedPaymentId ?? ""}
       />
       <Card
@@ -96,16 +103,27 @@ export function Home() {
                     <TableCell>
                       {translatePaymentStatus(payment.status)}
                     </TableCell>
-                    <TableCell>
+                    <TableCell className="flex flex-row space-x-2">
                       <div
                         onClick={() => {
                           setSelectedPaymentId(payment.id);
-                          setIsModalOpen(true);
+                          setIsPreviewModalOpen(true);
                         }}
                         className="cursor-pointer transition-all hover:text-green-500"
                       >
                         <Eye />
                       </div>
+                      {payment.status === PaymentStatus.PENDING && (
+                        <div
+                          onClick={() => {
+                            setSelectedPaymentId(payment.id);
+                            setIsForceModalOpen(true);
+                          }}
+                          className="cursor-pointer transition-all hover:text-red-500"
+                        >
+                          <AlertCircle />
+                        </div>
+                      )}{" "}
                     </TableCell>
                   </TableRow>
                 ))

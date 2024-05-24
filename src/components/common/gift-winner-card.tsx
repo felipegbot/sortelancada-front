@@ -3,8 +3,10 @@ import { UsersRaffleNumber } from "@/common/interfaces/users-raffle-number.inter
 
 export default function GiftWinnerCard({
   userRaffleNumber,
+  censor = true,
 }: {
   userRaffleNumber: UsersRaffleNumber;
+  censor?: boolean;
 }) {
   return (
     <div className="flex flex-row">
@@ -13,12 +15,19 @@ export default function GiftWinnerCard({
       </div>
       <div className="flex justify-evenly flex-col py-2 textxl">
         <span>
-          {censorUsername(userRaffleNumber.common_user.name).toUpperCase()}
+          {censor
+            ? censorUsername(userRaffleNumber.common_user.name).toUpperCase()
+            : userRaffleNumber.common_user.name.toUpperCase()}
         </span>
-        <span className="font-bold text-tiny md:text-medium">
+        <span className="font-bold md:text-medium">
           Com o número da sorte: 🎫
           {<span className="text-green-500">{userRaffleNumber.number}</span>}
         </span>
+        {!censor && (
+          <span>
+            Telefone para contato: {userRaffleNumber.common_user?.phone}
+          </span>
+        )}
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 export const useGetPaginatedPayments = () => {
   const [page, setPage] = useState(1);
-  const [perPage, setPerPage] = useState(1);
+  const [perPage, setPerPage] = useState(10);
   const [name, setName] = useState("");
   const [total, setTotal] = useState(0);
 

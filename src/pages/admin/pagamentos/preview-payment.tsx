@@ -40,7 +40,7 @@ export default function PreviewPayment({
                 <PaymentCard payment={payment} />
               </ModalBody>
               <ModalFooter>
-                <Button color="default" variant="light" onPress={onClose}>
+                <Button color="default" onPress={onClose}>
                   Fechar
                 </Button>
               </ModalFooter>
