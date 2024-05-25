@@ -9,7 +9,7 @@ const headers = {
 };
 
 const Api = axios.create({
-  baseURL: "https://9c20-2804-8be0-107-5f00-b818-4b9-11d5-a1ff.ngrok-free.app",
+  baseURL: "https://sortelancada-api.onrender.com",
   headers,
 });
 
