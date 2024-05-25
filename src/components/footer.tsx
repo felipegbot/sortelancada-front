@@ -1,4 +1,7 @@
+import { useRouter } from "next/router";
+
 export default function Footer() {
+  const router = useRouter();
   return (
     <div className="bottom-0 bg-black flex-col w-full items-center space-y-4 py-4 flex text-center text-tiny break-keep">
       <div>
@@ -45,9 +48,20 @@ export default function Footer() {
           © 2024 - Todos os direitos reservados
         </span>
         <div className="flex flex-row w-full space-x-1 justify-center">
-          <div> Termos de uso</div>
+          <div
+            className="text-blue-500 cursor-pointer"
+            onClick={() => router.push("/termos-de-uso")}
+          >
+            Termos de uso
+          </div>
           <span>|</span>
-          <div> Política de Privacidade</div>
+          <div
+            className="text-blue-500 cursor-pointer"
+            onClick={() => router.push("/politicas")}
+          >
+            {" "}
+            Política de Privacidade
+          </div>
         </div>
         <div className="flex flex-row w-full space-x-1 justify-center">
           <div>Sistema desenvolvido por sortelancada.com</div>

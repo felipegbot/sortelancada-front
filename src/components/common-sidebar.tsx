@@ -19,6 +19,7 @@ import { useAppDispatch, useAppSelector } from "@/lib/redux/store";
 import { clearCommonUserData } from "@/lib/redux/reducers/common-user.reducer";
 import Api from "@/common/api";
 import { RaffleStatus } from "@/common/enum/raffle-status.enum";
+import { useRouter } from "next/router";
 
 const SidebarFunctionItem: React.FC<{
   label: string;
@@ -65,6 +66,7 @@ export const CommonSidebarComponent = ({
   toggleIsOpen: () => void;
 }) => {
   const location = usePathname();
+  const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { name, phone } = useAppSelector((state) => state.commonUserReducer);
   const dispatch = useAppDispatch();
@@ -81,6 +83,10 @@ export const CommonSidebarComponent = ({
   useEffect(() => {
     fetchCurrentRaffle();
   }, []);
+
+  useEffect(() => {
+    if (isOpen) toggleIsOpen();
+  }, [location]);
 
   return (
     <>
@@ -176,7 +182,10 @@ export const CommonSidebarComponent = ({
                 <SidebarFunctionItem
                   label="Sair"
                   icon={<LogOut color="gray" />}
-                  onClick={() => dispatch(clearCommonUserData())}
+                  onClick={() => {
+                    dispatch(clearCommonUserData());
+                    router.push("/");
+                  }}
                 />
               ) : null}
             </div>

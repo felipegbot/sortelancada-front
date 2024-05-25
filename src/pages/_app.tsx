@@ -35,7 +35,9 @@ export default function App({ Component, pageProps }: AppProps) {
             <div className="w-full cursor-pointer sticky pr-4 bottom-10 right-0 bg-none flex justify-end">
               <div
                 className="bg-black flex-row flex px-2 py-1 space-x-1 rounded-xl"
-                onClick={() => window.open("https://bit.ly/3tVdllq", "_blank")}
+                onClick={() =>
+                  window.open("https://wa.me/553891920497", "_blank")
+                }
               >
                 <span className="font-bold">Suporte</span>
                 <img src="/whatsapp.svg" height={20} width={20} />

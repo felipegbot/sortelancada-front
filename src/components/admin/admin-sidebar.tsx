@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, useEffect } from "react";
 import {
   Banknote,
   ChevronLeft,
@@ -39,6 +39,10 @@ export const AdminSidebarComponent = ({
   toggleIsOpen: () => void;
 }) => {
   const location = usePathname();
+
+  useEffect(() => {
+    if (isOpen) toggleIsOpen();
+  }, [location]);
 
   return (
     <>

@@ -18,6 +18,7 @@ import { useRouter } from "next/router";
 import currencyFormatter from "@/lib/currency-formatter";
 import GiftPrizesGrid from "@/components/common/gift-prizes-grid";
 import { formatNumberToFitZeros } from "@/common/helpers/format-number-to-fit-zeros";
+import { useGetTopBuyers } from "@/hooks/common/use-get-top-buyers.hook";
 
 export default function RafflePage() {
   const [creatingPayment, setCreatingPayment] = useState(false);
@@ -33,6 +34,11 @@ export default function RafflePage() {
     isLoading,
     winners = [],
   } = useGetOneRaffle(params?.id ? (params.id as string) : "", true);
+
+  const { topBuyers } = useGetTopBuyers(
+    params?.id ? (params.id as string) : "",
+  );
+
   useEffect(() => {
     const isScroll = searchParams.get("compra-rapida");
     if (isScroll == "true" && window && buyGridRef?.current)
@@ -95,6 +101,29 @@ export default function RafflePage() {
               </div>
             }
           />
+        )}
+        {raffle?.status === RaffleStatus.OPEN && (
+          <div className="bg-black/65 rounded-xl">
+            <Card
+              isBlurred
+              className="p-4 items-center flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 justify-center"
+            >
+              {topBuyers &&
+                topBuyers?.length > 0 &&
+                new Array(3).fill(topBuyers[0]).map((buyer, index) => (
+                  <div className="flex flex-col rounded-xl">
+                    <Card
+                      isBlurred
+                      className="w-full text-center font-bold text-white p-8"
+                    >
+                      <span>{index + 1}°🏅 </span>
+                      <span>{buyer.common_user_name}</span>
+                      <span>{buyer.count} cotas</span>
+                    </Card>
+                  </div>
+                ))}
+            </Card>
+          </div>
         )}
         {raffle?.status === RaffleStatus.OPEN && (
           <div className="bg-black/65 rounded-xl">
