@@ -7,33 +7,39 @@ import {
 } from "@nextui-org/modal";
 import { Button } from "@nextui-org/button";
 import { Card } from "@nextui-org/card";
-import { useGetOnePayment } from "@/hooks/get-payment.hook";
-import currencyFormatter from "@/lib/currency-formatter";
 import { toastError } from "@/lib/toastError";
 import Api from "@/common/api";
 import { toast } from "react-toastify";
+import { CommonUser } from "@/common/interfaces/common-users.interface";
+import { Input } from "@nextui-org/input";
+import { useState } from "react";
 
-export default function ForcePayment({
+export default function UpdateCommonUser({
   isOpen,
   closeModal,
-  paymentId,
+  commonUser,
+  onUpdated,
 }: {
   isOpen: boolean;
   closeModal: () => void;
-  paymentId: string;
+  onUpdated?: () => Promise<void>;
+  commonUser?: CommonUser;
 }) {
-  const { payment } = useGetOnePayment(paymentId);
-  async function handleForcePayment() {
+  const [userName, setUserName] = useState<string>(commonUser?.name as string);
+  async function handleUpdateUser() {
     try {
-      await Api.post(`/payment/force-confirm-payment/${payment?.id}`);
-      toast.success("Pagamento forçado com sucesso");
+      await Api.post(`/common-user/update-user-by-phone/${commonUser?.phone}`, {
+        name: userName,
+      });
+      onUpdated?.();
+      toast.success("Nome do usuário atualizado com sucesso");
     } catch (error) {
       toastError(error);
     } finally {
       closeModal();
     }
   }
-  return payment ? (
+  return commonUser ? (
     <Card isBlurred>
       <Modal
         isOpen={isOpen}
@@ -46,28 +52,31 @@ export default function ForcePayment({
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                Deseja forçar o pagamento?
+                Atualizando o usuário {commonUser.id}
               </ModalHeader>
               <ModalBody>
-                <span>Pagamento: {payment.id}</span>
-                <span>No valor: {currencyFormatter.format(payment.value)}</span>
-                <span>
-                  Número de cotas a serem compradas: {payment.raffles_quantity}
-                </span>
-                <span className="font-bold uppercase">
-                  Essa ação é irreversível
-                </span>
+                <Input
+                  defaultValue={commonUser?.name}
+                  label="Nome"
+                  onChange={(e) => setUserName(e.target.value)}
+                />
+                <Input
+                  value={commonUser.phone}
+                  label="Telefone"
+                  disabled
+                  className="opacity-60"
+                />
               </ModalBody>
               <ModalFooter>
                 <Button color="default" variant="bordered" onPress={onClose}>
                   Cancelar
                 </Button>
                 <Button
-                  color="danger"
+                  color="success"
                   variant="solid"
-                  onClick={handleForcePayment}
+                  onClick={handleUpdateUser}
                 >
-                  Sim
+                  Atualizar
                 </Button>
               </ModalFooter>
             </>

@@ -15,15 +15,15 @@ import { Pagination } from "@nextui-org/pagination";
 import { AlertCircle, Eye } from "lucide-react";
 import { Input } from "@nextui-org/input";
 import { useState } from "react";
-import PreviewPayment from "./preview-payment";
-import ForcePayment from "./force-payment";
 import { PaymentStatus } from "@/common/enum/payment-status.enum";
+import PreviewPayment from "@/components/admin/preview-payment";
+import ForcePayment from "@/components/admin/force-payment";
 
 export function Home() {
   const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false);
   const [isForceModalOpen, setIsForceModalOpen] = useState(false);
   const [selectedPaymentId, setSelectedPaymentId] = useState<string>();
-  const { payments, page, setPage, total, perPage, setName, name } =
+  const { payments, page, setPage, total, perPage, setName, name, refetch } =
     useGetPaginatedPayments();
 
   const pages = Math.ceil(total / perPage);
@@ -38,6 +38,9 @@ export function Home() {
         isOpen={isForceModalOpen}
         closeModal={() => setIsForceModalOpen(false)}
         paymentId={selectedPaymentId ?? ""}
+        onUpdate={async () => {
+          await refetch();
+        }}
       />
       <Card
         isBlurred

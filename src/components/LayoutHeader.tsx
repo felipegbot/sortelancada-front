@@ -12,7 +12,7 @@ export default function LayoutHeader() {
     setIsOpen(!isOpen);
   };
   const handleClickHome = () => {
-    router.push(`/`);
+    router.push(isAdmin ? `/admin` : `/`);
   };
   return (
     <div className="w-full h-[72px] bg-black sticky top-0 flex flex-row justify-between z-50">
@@ -38,7 +38,7 @@ export default function LayoutHeader() {
 
       {isAdmin ? (
         <div
-          className="p-4 w-[70px] h-[70px] cursor-pointer"
+          className="p-4 flex items-center justify-center cursor-pointer"
           onClick={() => router.push("/admin")}
         >
           <CircleUser />

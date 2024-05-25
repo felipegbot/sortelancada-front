@@ -1,5 +1,12 @@
 import { ReactElement } from "react";
-import { Banknote, ChevronLeft, HomeIcon, LogOut, Star } from "lucide-react";
+import {
+  Banknote,
+  ChevronLeft,
+  CircleUser,
+  HomeIcon,
+  LogOut,
+  Star,
+} from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -72,10 +79,10 @@ export const AdminSidebarComponent = ({
                 url="/admin/pagamentos"
               />
               <SidebarItem
-                isSelected={location === "/ganhadores"}
-                label="Ganhadores"
-                icon={<Star />}
-                url="/ganhadores"
+                isSelected={location === "/admin/usuarios"}
+                label="Usuários"
+                icon={<CircleUser />}
+                url="/admin/usuarios"
               />
             </div>
             <div className="">
