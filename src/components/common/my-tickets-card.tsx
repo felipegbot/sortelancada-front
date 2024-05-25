@@ -22,7 +22,9 @@ export default function MyTicketsCard({
         ) : raffle?.status === RaffleStatus.OPEN ? (
           <OpenRaffleCard raffle={raffle} canBuy={false} />
         ) : null}
-        {payments?.map((payment) => <PaymentCard payment={payment} />)}
+        {payments?.map((payment) => (
+          <PaymentCard key={payment.id} payment={payment} />
+        ))}
       </div>
     </Skeleton>
   );

@@ -17,7 +17,6 @@ import { toastError } from "@/lib/toastError";
 
 export default function PaymentDetailPage() {
   const params = useParams();
-  if (!params?.id) return null;
   const { payment = {} as Payment, isLoading } = useGetOnePayment(
     params?.id ? (params.id as string) : "",
   );
@@ -34,6 +33,7 @@ export default function PaymentDetailPage() {
     restart(mmt(payment?.expires_at).toDate());
   }, [payment]);
 
+  if (!params?.id) return null;
   return (
     <Skeleton isLoaded={!isLoading} className="rounded-xl">
       <div className="bg-black/65 rounded-xl w-full h-full">

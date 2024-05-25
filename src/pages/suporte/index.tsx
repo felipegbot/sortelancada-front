@@ -18,7 +18,7 @@ export default function SupportPage() {
             startContent={<MoveRight />}
           >
             Fazendo login no site e abrindo o Menu Principal, você consegue
-            consultar suas últimas compras no menu "MINHAS COTAS".
+            consultar suas últimas compras no menu{`" MINHAS COTAS"`}.
           </AccordionItem>
           <AccordionItem
             key="2"

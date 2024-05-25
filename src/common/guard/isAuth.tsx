@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-export default function isAuth() {
+export default function useIsAuth() {
   const router = useRouter();
   const auth =
     typeof window !== "undefined" ? localStorage?.getItem("user_token") : true;

@@ -22,8 +22,9 @@ export default function MyTicketsPage() {
           isOpen={isModalOpen}
           closeModal={() => setIsModalOpen(false)}
         />
-        {groupedPayments?.map((group) => (
+        {groupedPayments?.map((group, index) => (
           <MyTicketsCard
+            key={index}
             payments={group.payments}
             raffle_id={group.raffle_id}
           />

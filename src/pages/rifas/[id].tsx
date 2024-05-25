@@ -110,8 +110,8 @@ export default function RafflePage() {
             >
               {topBuyers &&
                 topBuyers?.length > 0 &&
-                new Array(3).fill(topBuyers[0]).map((buyer, index) => (
-                  <div className="flex flex-col rounded-xl">
+                topBuyers.map((buyer, index) => (
+                  <div className="flex flex-col rounded-xl" key={index}>
                     <Card
                       isBlurred
                       className="w-full text-center font-bold text-white p-8"

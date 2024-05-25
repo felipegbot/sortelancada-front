@@ -51,7 +51,7 @@ export default function GiftPrizesGrid({
         {showWinners ? (
           <div className="flex space-y-4 flex-col items-center">
             {urnWinners.map((winner: UsersRaffleNumber) => (
-              <Card className="px-4 py-2 max-w-sm w-full">
+              <Card key={winner.id} className="px-4 py-2 max-w-sm w-full">
                 <GiftWinnerCard userRaffleNumber={winner} />
               </Card>
             ))}

@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <Skeleton isLoaded={!isLoading} className="rounded-xl">
       <div className="space-y-4 my-8 h-full w-full flex flex-col justify-center items-center">
-        {raffles && <RafflesList raffles={new Array(10).fill(raffles[0])} />}
+        {raffles && <RafflesList raffles={raffles} />}
       </div>
     </Skeleton>
   );
