@@ -125,14 +125,14 @@ export default function RafflePage() {
             </Card>
           </div>
         )}
-        {raffle?.status === RaffleStatus.OPEN && (
+        {raffle?.status === RaffleStatus.OPEN && raffle.gift_numbers && (
           <div className="bg-black/65 rounded-xl">
             <Card isBlurred className="p-4 items-center space-y-4">
               <div className="flex flex-row items-center">
                 <div className="flex flex-col pl-4">
                   <span>Muitas chances de ganhar na hora! 🍀</span>
                   <span className="font-bold md:text-medium">
-                    ainda restam {raffle.gift_numbers.length - winners.length}{" "}
+                    ainda restam {raffle.gift_numbers?.length - winners?.length}{" "}
                     cotas premiadas! 🎫
                   </span>
                 </div>
@@ -170,7 +170,7 @@ export default function RafflePage() {
           <GiftPrizesGrid
             prizeNumbers={formatNumberToFitZeros(
               raffle.gift_numbers,
-              raffle.initial_numbers_qtd.toString().length,
+              raffle.initial_numbers_qtd?.toString()?.length,
             )}
             urnWinners={winners}
           />
