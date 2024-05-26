@@ -11,7 +11,7 @@ export default function GiftPrizesGrid({
   urnWinners: UsersRaffleNumber[];
 }) {
   const [showWinners, setShowWinners] = useState(false);
-  const numberLength = prizeNumbers[0].length;
+  const numberLength = prizeNumbers[0]?.length ?? 6;
   const alreadyDrawn = urnWinners.map((urnWinner) =>
     urnWinner.number.toString().padStart(numberLength, "0"),
   );

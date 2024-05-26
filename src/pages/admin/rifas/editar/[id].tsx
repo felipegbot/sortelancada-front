@@ -77,7 +77,7 @@ export default function Home() {
         gift_numbers: formattedGiftNumber,
       });
 
-      if (images.length > 0) {
+      if (images?.length > 0) {
         const form = new FormData();
         for (const img of images) {
           form.append("medias", img);
@@ -90,7 +90,7 @@ export default function Home() {
         toast.success("Imagens da rifa atualizadas com sucesso");
       }
 
-      if (cover_image.length > 0) {
+      if (cover_image?.length > 0) {
         const form = new FormData();
         form.append("cover", data.cover_image[0]);
         await Api.post(`/raffles/update-cover/${raffle?.id}`, form, {
