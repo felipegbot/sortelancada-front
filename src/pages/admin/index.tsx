@@ -1,3 +1,5 @@
+import { RaffleStatus } from "@/common/enum/raffle-status.enum";
+import FinishRaffle from "@/components/admin/finish-raffle";
 import { useGetRafflesHook } from "@/hooks/admin/get-raffles.hook";
 import mmt from "@/lib/mmt";
 import { Button } from "@nextui-org/button";
@@ -10,14 +12,25 @@ import {
   TableRow,
   TableCell,
 } from "@nextui-org/table";
-import { CrownIcon, Pencil } from "lucide-react";
+import { Check, CrownIcon, Pencil } from "lucide-react";
 import { useRouter } from "next/router";
+import { useState } from "react";
 export function Home() {
-  const { raffles } = useGetRafflesHook();
+  const { raffles, refetch } = useGetRafflesHook();
   const router = useRouter();
+  const [isFinishRaffleModalOpen, setIsFinishRaffleModalOpen] = useState(false);
+  const [selectedRaffleId, setSelectedRaffleId] = useState<string>();
 
   return (
     <div className="w-full h-min rounded-xl flex justify-center">
+      <FinishRaffle
+        isOpen={isFinishRaffleModalOpen}
+        closeModal={() => setIsFinishRaffleModalOpen(false)}
+        raffleId={selectedRaffleId ?? ""}
+        onUpdate={async () => {
+          await refetch();
+        }}
+      />
       <Card
         isBlurred
         className="flex space-y-4 max-w-7xl p-8 justify-center items-center w-full"
@@ -68,6 +81,17 @@ export function Home() {
                       >
                         <CrownIcon />
                       </div>
+                      {raffle.status === RaffleStatus.OPEN && (
+                        <div
+                          onClick={() => {
+                            setSelectedRaffleId(raffle.id);
+                            setIsFinishRaffleModalOpen(true);
+                          }}
+                          className="cursor-pointer transition-all hover:text-green-500"
+                        >
+                          <Check />
+                        </div>
+                      )}
                     </TableCell>
                   </TableRow>
                 ))
