@@ -10,7 +10,7 @@ export const useGetOnePayment = (id: string) => {
     return data.payment as Payment;
   };
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ["useGetOnePayment", id],
     queryFn: fetchPayment,
   });
@@ -18,5 +18,6 @@ export const useGetOnePayment = (id: string) => {
   return {
     payment: data,
     isLoading,
+    refetch,
   };
 };

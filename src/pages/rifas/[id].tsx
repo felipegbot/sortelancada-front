@@ -62,7 +62,7 @@ export default function RafflePage() {
         raffle_id: raffle?.id,
       });
       toast.success("Pagamento criado com sucesso!");
-      router.push(`/pagamentos/${data.payment.id}`);
+      router.push(`/pagamentos/${data.payment.id}?redirect-on-success=true`);
     } catch (error) {
       toastError(error);
     } finally {

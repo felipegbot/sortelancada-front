@@ -1,5 +1,5 @@
 import { Card } from "@nextui-org/card";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import { useGetOnePayment } from "@/hooks/get-payment.hook";
 import { Skeleton } from "@nextui-org/skeleton";
 import currencyFormatter from "@/lib/currency-formatter";
@@ -14,12 +14,17 @@ import { Payment } from "@/common/interfaces/payments.interface";
 import { useEffect } from "react";
 import PaymentStatusBadge from "@/components/common/payment-status-badge";
 import { toastError } from "@/lib/toastError";
+import { useRouter } from "next/router";
 
 export default function PaymentDetailPage() {
+  const router = useRouter();
   const params = useParams();
-  const { payment = {} as Payment, isLoading } = useGetOnePayment(
-    params?.id ? (params.id as string) : "",
-  );
+  const searchParams = useSearchParams();
+  const {
+    payment = {} as Payment,
+    isLoading,
+    refetch,
+  } = useGetOnePayment(params?.id ? (params.id as string) : "");
 
   const { seconds, minutes, restart } = useTimer({
     expiryTimestamp: payment?.expires_at,
@@ -31,8 +36,21 @@ export default function PaymentDetailPage() {
 
   useEffect(() => {
     restart(mmt(payment?.expires_at).toDate());
+    const shouldRedirect = searchParams.get("redirect-on-success");
+    if (payment.status === PaymentStatus.SUCCESS && shouldRedirect)
+      router.push("/minhas-cotas");
   }, [payment]);
 
+  const fifteen_sec = 15000;
+
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      console.log("refetching");
+      await refetch();
+    }, fifteen_sec);
+
+    return () => clearInterval(interval);
+  }, []);
   if (!params?.id) return null;
   return (
     <Skeleton isLoaded={!isLoading} className="rounded-xl">
