@@ -1,28 +1,32 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-interface CommonUserState {
+export interface CommonUserState {
   name: string;
   phone: string;
 }
 
-const initialState: CommonUserState = {
-  name: "",
-  phone: "",
-};
-
 export const commonUser = createSlice({
   name: "commonUser",
-  initialState,
+  initialState: (typeof window !== "undefined"
+    ? localStorage.getItem("common-user")
+      ? {
+          ...(JSON.parse(
+            localStorage.getItem("common-user") as string,
+          ) as CommonUserState),
+        }
+      : null
+    : { name: "", phone: "" }) as CommonUserState | null,
   reducers: {
-    setCommonUserData: (state, action: PayloadAction<CommonUserState>) => {
-      state.name = action.payload.name;
-      state.phone = action.payload.phone;
+    setCommonUserData: (_state, action: PayloadAction<CommonUserState>) => {
+      _state = action.payload;
+      localStorage.setItem("common-user", JSON.stringify(action.payload));
+      return action.payload;
     },
 
-    clearCommonUserData: (state) => {
-      state.name = initialState.name;
-      state.phone = initialState.phone;
+    clearCommonUserData: () => {
+      localStorage.removeItem("common-user");
+      return null;
     },
   },
 });

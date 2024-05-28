@@ -68,7 +68,7 @@ export const CommonSidebarComponent = ({
   const location = usePathname();
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { name, phone } = useAppSelector((state) => state.commonUserReducer);
+  const commonUser = useAppSelector((state) => state.commonUserReducer);
   const dispatch = useAppDispatch();
   const [currentRaffleId, setCurrentRaffleId] = useState(null);
 
@@ -125,7 +125,7 @@ export const CommonSidebarComponent = ({
                 icon={<HomeIcon />}
                 url="/"
               />
-              {!name || !phone ? (
+              {!commonUser ? (
                 <SidebarFunctionItem
                   label="Cadastro/Login"
                   icon={<UserPlus />}
@@ -178,7 +178,7 @@ export const CommonSidebarComponent = ({
                 icon={<HelpCircle />}
                 url="/suporte"
               />
-              {name && phone ? (
+              {commonUser ? (
                 <SidebarFunctionItem
                   label="Sair"
                   icon={<LogOut color="gray" />}

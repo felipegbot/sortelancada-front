@@ -17,7 +17,9 @@ export default function PaymentCard({ payment }: { payment: Payment }) {
 
   const handleClick = () => {
     if (isExpired) return;
-    router.push(`/pagamentos/${payment.id}`);
+    router.push(
+      `/pagamentos/${payment.id}?redirect-on-success=${payment.status === PaymentStatus.PENDING}`,
+    );
   };
   return (
     <div>

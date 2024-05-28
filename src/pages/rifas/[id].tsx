@@ -22,7 +22,7 @@ import { useGetTopBuyers } from "@/hooks/common/use-get-top-buyers.hook";
 
 export default function RafflePage() {
   const [creatingPayment, setCreatingPayment] = useState(false);
-  const { name, phone } = useAppSelector((state) => state.commonUserReducer);
+  const commonUser = useAppSelector((state) => state.commonUserReducer);
   const params = useParams();
   const searchParams = useSearchParams();
   const buyGridRef = useRef<null | HTMLDivElement>(null);
@@ -51,13 +51,13 @@ export default function RafflePage() {
   const handleBuy = async (amount: number) => {
     try {
       setCreatingPayment(true);
-      if (!name || !phone) {
+      if (!commonUser) {
         setIsModalOpen(true);
         throw new Error("É necessário estar autenticado para comprar Cotas!");
       }
 
       const { data } = await Api.post("/payment/generate-payment", {
-        phone,
+        phone: commonUser.phone,
         amount,
         raffle_id: raffle?.id,
       });
