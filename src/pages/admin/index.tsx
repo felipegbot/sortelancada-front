@@ -49,7 +49,7 @@ export function Home() {
             <TableColumn>ID</TableColumn>
             <TableColumn>Prêmio</TableColumn>
             <TableColumn>Quantidade inicial</TableColumn>
-            <TableColumn>Quantidade restante</TableColumn>
+            <TableColumn>Quantidade vendida</TableColumn>
             <TableColumn>Porcentagem vendida || restante</TableColumn>
             <TableColumn>Criada em</TableColumn>
             <TableColumn>Última atualização em</TableColumn>
