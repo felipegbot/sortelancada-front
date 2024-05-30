@@ -48,6 +48,9 @@ export function Home() {
           <TableHeader>
             <TableColumn>ID</TableColumn>
             <TableColumn>Prêmio</TableColumn>
+            <TableColumn>Quantidade inicial</TableColumn>
+            <TableColumn>Quantidade restante</TableColumn>
+            <TableColumn>Porcentagem vendida || restante</TableColumn>
             <TableColumn>Criada em</TableColumn>
             <TableColumn>Última atualização em</TableColumn>
             <TableColumn>Ações</TableColumn>
@@ -58,6 +61,27 @@ export function Home() {
                   <TableRow key={raffle.id}>
                     <TableCell>{raffle.id}</TableCell>
                     <TableCell>{raffle.prize_name}</TableCell>
+                    <TableCell>{raffle.initial_numbers_qtd}</TableCell>
+                    <TableCell>
+                      {raffle.initial_numbers_qtd -
+                        (raffle.available_numbers_qtd ?? 0)}
+                    </TableCell>
+                    <TableCell>
+                      {(
+                        ((raffle.available_numbers_qtd ?? 0) /
+                          raffle.initial_numbers_qtd) *
+                        100
+                      ).toFixed(2)}
+                      % ||{" "}
+                      {(
+                        100 -
+                        ((raffle.available_numbers_qtd ?? 0) /
+                          raffle.initial_numbers_qtd) *
+                          100
+                      ).toFixed(2)}
+                      %
+                    </TableCell>
+
                     <TableCell>
                       {mmt(raffle.created_at).format("DD-MM-YYYY HH:mm:ss")}
                     </TableCell>
